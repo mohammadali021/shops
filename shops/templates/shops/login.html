@@ -1,0 +1,39 @@
+{% extends "Base.html" %}
+{% block content %}
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">فرم ورود کاربران</h1>
+                <p class="lead fw-normal text-white-50 mb-0"></p>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <center>
+                <div class="col-10">
+                    <p align="justify">
+                        <br>
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="mb-3 col-5">
+
+                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                   placeholder="نام کاربری رو وارد کن" name="username">
+                        </div>
+                        <div class="mb-3 col-5">
+
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                   placeholder="رمز ورود" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-success">!وارد شو</button>
+                        <button type="submit" class="btn btn-success" ><a href="{% url 'sign-in' %}" style=" text-decoration: none; color:white" >ثبت نام</a></button>
+
+                    </form>
+                    <br>
+                    </p>
+                </div>
+            </center>
+        </div>
+    </div>
+{% endblock %}

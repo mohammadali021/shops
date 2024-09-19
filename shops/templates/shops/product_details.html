@@ -1,0 +1,74 @@
+{% extends "Base.html" %}
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ product.picture.url }}" class="img-fluid rounded-start" alt="..." style="width: 400px">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text" align="justify">{{ product.long_description }}</p>
+                    <p><b>💰قیمت</b></p>
+
+                    {% if product.is_sale %}
+                        <strike>
+                            <p class="card-text"><small
+                                    class="text-body-secondary"><b>{{ product.price }}</b></small></p>
+                        </strike>
+                        <p class="card-text"><small
+                                class="text-body-secondary"><b>{{ product.sale_price }}</b></small></p>
+
+                    {% endif %}
+                    {% if product.is_sale == False %}
+                        <p class="card-text"><small class="text-body-secondary"><b>{{ product.price }}</b></small>
+                        </p>
+                    {% endif %}
+{#                    <select class="form-select" style="width:120px" id="cart-qty">#}
+{#                        <option selected>تعداد</option>#}
+{#                        <option value="1">1</option>#}
+{#                        <option value="2">2</option>#}
+{#                        <option value="3">3</option>#}
+{#                        <option value="3">4</option>#}
+{#                        <option value="3">5</option>#}
+{#                    </select>#}
+{#                    <hr>#}
+                    <button type="button" class="btn btn-outline-success" value="{{ product.id }}" id="add-cart">افزودن
+                        به سبد خرید
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <script>
+        $(document).on('click', '#add-cart', function (e) {
+
+            e.preventDefault();
+            $.ajax({
+                type: 'Post',
+                url: '{% url 'add_carts' %}',
+                data: {
+                    product_id: $("#add-cart").val(),
+                    {#product_qty:$("#cart-qty option:selected").text()#}
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+
+
+                },
+                success: function (json) {
+                    console.log(json)
+                    document.getElementById("cart_count").textContent = json.cart_count
+                },
+                error: function (xhr, errmsg, err) {
+                }
+
+
+            })
+        })
+
+    </script>
+{% endblock %}

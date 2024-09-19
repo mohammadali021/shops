@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "Base.html" %}
+{% block content %}
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">ثبت نام کن</h1>
+                <p class="lead fw-normal text-white-50 mb-0"></p>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <center>
+                <div class="col-10">
+                    <p align="justify">
+                        <br>
+                    <form method="post" action="{% url 'sign-in' %}">
+                        {% csrf_token %}
+                        {#                        <div class="mb-3 col-5">#}
+                        {##}
+                        {#                            {{ formregister.first_name }}#}
+                        {#                        </div>#}
+                        {#                        <div class="mb-3 col-5">#}
+                        {#                            {{ formregister.last_name }}#}
+                        {#                        </div>#}
+                        {#                        <div class="mb-3 col-5">#}
+                        {#                            {{ formregister.user_name }}#}
+                        {#                        </div>#}
+                        {#                        <div class="mb-3 col-5">#}
+                        {#                            {{ formregister.Email }}#}
+                        {#                        </div>#}
+                        {#                        <div class="mb-3 col-5">#}
+                        {#                            {{ formregister.password1 }}#}
+                        {#                        </div>#}
+                        {#                        <div class="mb-3 col-5">#}
+                        {#                            {{ formregister.password2}}#}
+                        {#                        </div>#}
+                        {{ formregister.as_p }}
+                        <button type="submit" class="btn btn-success">ثبت نام</button>
+                    </form>
+                    <br>
+                    </p>
+                </div>
+            </center>
+        </div>
+    </div>
+{% endblock %}
